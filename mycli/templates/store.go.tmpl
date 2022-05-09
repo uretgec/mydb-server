@@ -1,0 +1,78 @@
+package {{.DbName}}
+
+import (
+	{{.DbStorage}}store "github.com/uretgec/mydb/storage/{{.DbStorage}}"
+)
+
+type {{.DbDisplayName}} struct {
+	Storage *{{.DbStorage}}store.Store
+}
+
+func NewStore(dbPath, dbName string, bucketList, indexList []string, readOnly bool) (*{{.DbDisplayName}}, error) {
+
+	store, err := {{.DbStorage}}store.NewStore(
+		bucketList,
+		indexList,
+		dbPath,
+		dbName,
+		readOnly,
+	)
+	return &{{.DbDisplayName}}{
+		Storage: store,
+	}, err
+}
+
+func (ms *{{.DbDisplayName}}) CloseStore() {
+	ms.Storage.Close()
+}
+
+func (ms *{{.DbDisplayName}}) SyncStore() {
+	ms.Storage.Sync()
+}
+func (ms *{{.DbDisplayName}}) HasBucket(bucketName []byte) bool {
+	return ms.Storage.HasBucket(bucketName)
+}
+
+func (ms *{{.DbDisplayName}}) Set(bucketName []byte, k []byte, data []byte) ([]byte, error) {
+	return ms.Storage.Set(bucketName, k, data)
+}
+
+func (ms *{{.DbDisplayName}}) Get(bucketName []byte, k []byte) ([]byte, error) {
+	return ms.Storage.Get(bucketName, k)
+}
+
+func (ms *{{.DbDisplayName}}) MGet(bucketName []byte, keys ...[]byte) (interface{}, error) {
+	return ms.Storage.MGet(bucketName, keys...)
+}
+
+func (ms *{{.DbDisplayName}}) List(bucketName []byte, k []byte, perpage int) ([]string, error) {
+	return ms.Storage.List(bucketName, k, perpage)
+}
+
+func (ms *{{.DbDisplayName}}) PrevList(bucketName []byte, k []byte, perpage int) ([]string, error) {
+	return ms.Storage.PrevList(bucketName, k, perpage)
+}
+
+func (ms *{{.DbDisplayName}}) Exist(bucketName []byte, k []byte) (bool, error) {
+	return ms.Storage.KeyExist(bucketName, k)
+}
+
+func (ms *{{.DbDisplayName}}) ValueExist(bucketName []byte, v []byte) (bool, error) {
+	return ms.Storage.ValueExist(bucketName, v)
+}
+
+func (ms *{{.DbDisplayName}}) Del(bucketName []byte, k []byte) error {
+	return ms.Storage.Delete(bucketName, k)
+}
+
+func (ms *{{.DbDisplayName}}) BStats(bucketName []byte) int {
+	return ms.Storage.BucketStats(bucketName)
+}
+
+func (ms *{{.DbDisplayName}}) Backup(path, filename string) error {
+	return ms.Storage.Backup(path, filename)
+}
+
+func (ms *{{.DbDisplayName}}) Restore(path, filename string) error {
+	return ms.Storage.Restore(path, filename)
+}

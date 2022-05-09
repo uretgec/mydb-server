@@ -1,0 +1,14 @@
+service-name: mystorage
+databases:
+  - devstore
+
+devstore:
+  sync-interval: 10
+  redis-addr: localhost
+  redis-port: 6379
+  db-storage: boltdb # boltdb|sniper
+  db-name: devstore
+  db-display-name: DevStore
+  db-path: ../data/db/devstore/
+  db-read-only: false
+  container-name: devstorage

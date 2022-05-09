@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+{{range $itemKey, $itemData := .}}
+  {{$itemData.ContainerName}}:
+    image: {{$itemData.ContainerName}}:{{$itemData.DbName}}
+    build:
+      context: ./mystorage
+      args:
+        ENV_FILE: .{{$itemData.DbName}}.env
+    container_name: {{$itemData.ContainerName}}
+    restart: always
+    expose:
+      - "{{$itemData.RedisPort}}"
+    ports:
+      - "{{$itemData.RedisPort}}:{{$itemData.RedisPort}}"
+    networks:
+      - mydbserver-net
+    volumes:
+      - ./data/db/{{$itemData.DbName}}:/usr/local/data/db/{{$itemData.DbName}}
+{{end}}
+networks:
+  mydbserver-net:

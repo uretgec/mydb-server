@@ -13,3 +13,12 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# database folders
+/data/db/*
+/data/backup/*
+/build/*
+!/data/.gitkeep
+!/data/db/.gitkeep
+!/data/backup/.gitkeep
+!/build/.gitkeep
