@@ -1,0 +1,20 @@
+ostypes: "none"
+archtypes: "none"
+
+services:
+  - mystorage
+  - mycli
+
+mystorage:
+  path: "../mystorage/"
+  dest: "../build/dev/mystorage/"
+  output: "mystorage"
+  copyTo: "*.env *.service"
+  senv: "dev"
+
+mycli:
+  path: "../mycli/"
+  dest: "../build/dev/mycli/"
+  output: "mycli"
+  copyto: "*.yaml sh"
+  senv: "dev"
