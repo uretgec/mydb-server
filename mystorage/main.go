@@ -19,13 +19,13 @@ import (
 var ServiceBuild string
 var ServiceCommitId string
 
-var ServiceName string = "bustoragedefault"
+var ServiceName string = "mystoragedefault"
 var ServiceVersion string = "1.0.0"
-
-//var ServiceCommitId string = "" // TODO: ileride commitid olarak versionlarız
 
 var (
 	fs = flag.NewFlagSet(ServiceName, flag.ExitOnError)
+
+	bucketList, indexList ArrayFlagString
 
 	syncInterval = fs.Int("sync-interval", 30, "sync interval number for db synced period")
 	redisAddr    = fs.String("redis-addr", "localhost:6379", "redis addr for sync data to storage service")
@@ -46,6 +46,10 @@ func main() {
 	loggers.Sugar.Info("service started")
 
 	// Flag Parse with Env
+	fs.Var(&bucketList, "bucket-list", "db bucket list") // Multiple
+	fs.Var(&indexList, "index-list", "db index list")    // Multiple
+
+	// Flag Parse with Env
 	err := ff.Parse(
 		fs, os.Args[1:],
 		ff.WithConfigFileFlag("env-file"),
@@ -58,7 +62,7 @@ func main() {
 	}
 
 	// Database Conn
-	err = services.SetupStorage(*dbName, *dbPath, *dbReadOnly)
+	err = services.SetupStorage(*dbName, *dbPath, bucketList, indexList, *dbReadOnly)
 	if err != nil {
 		loggers.Sugar.With("error", err).Fatal("store db error")
 	}

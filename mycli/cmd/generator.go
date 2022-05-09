@@ -15,15 +15,17 @@ type DbList []struct {
 }
 
 type DbStore struct {
-	SyncInterval  string `json:"sync-interval"`
-	RedisAddr     string `json:"redis-addr"`
-	RedisPort     string `json:"redis-port"`
-	DbStorage     string `json:"db-storage"`
-	DbName        string `json:"db-name"`
-	DbDisplayName string `json:"db-display-name"`
-	DbPath        string `json:"db-path"`
-	DbReadOnly    bool   `json:"db-read-only"`
-	ContainerName string `json:"container-name"`
+	SyncInterval  int      `json:"sync-interval"`
+	RedisAddr     string   `json:"redis-addr"`
+	RedisPort     int      `json:"redis-port"`
+	DbStorage     string   `json:"db-storage"`
+	DbName        string   `json:"db-name"`
+	DbDisplayName string   `json:"db-display-name"`
+	DbPath        string   `json:"db-path"`
+	DbReadOnly    bool     `json:"db-read-only"`
+	ContainerName string   `json:"container-name"`
+	BucketList    []string `json:"bucket-list"`
+	IndexList     []string `json:"index-list"`
 }
 
 // generatorCmd represents the generator command
@@ -50,7 +52,8 @@ var generatorCmd = &cobra.Command{
 
 			for _, dbKey := range dbNames {
 				// Store Parameters
-				dbParams := viper.GetStringMapString(dbKey)
+				dbParams := viper.GetStringMap(dbKey)
+				fmt.Println(dbParams)
 
 				// Sorry about that
 				dbStore := &DbStore{}

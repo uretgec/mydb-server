@@ -2,35 +2,32 @@ package services
 
 import (
 	"github.com/uretgec/mydb/storage/interfaces"
-    {{range $itemKey, $itemData := .}}
-        "github.com/uretgec/mystorage/store/{{$itemData.DbName}}"
+    {{range $itemKey, $itemData := . -}}
+    "github.com/uretgec/mydb-server/mystorage/store/{{$itemData.DbName}}"
     {{end}}
 )
 
 var Store interfaces.StorageClient //interfaces.StoreClient
 
 const (
-{{range $itemKey, $itemData := .}}
+    {{range $itemKey, $itemData := . -}}
     {{$itemData.DbDisplayName}} = "{{$itemData.DbName}}"
-{{end}}
+    {{end}}
 )
 
-func SetupStorage(name, path string, readOnly bool) error {
+func SetupStorage(name, path string, bucketList, indexList []string, readOnly bool) error {
 	var err error
-    {{ if gt (len .) 0 }}
-        {{range $itemKey, $itemData := .}}
-            {{ if eq $itemKey 0 }}
-            if name == {{$itemData.DbDisplayName}} {
-                Store, err = {{$itemData.DbName}}.NewStore(path, name, readOnly)
-            {{else}}
-            } else if name == {{$itemData.DbDisplayName}} {
-                Store, err = {{$itemData.DbName}}.NewStore(path, name, readOnly)
-            {{end}}
-        {{end}}
-            }
+    {{ if gt (len .) 0 }}{{range $itemKey, $itemData := .}}{{ if eq $itemKey 0 }}
+    if name == {{$itemData.DbDisplayName}} {
+        Store, err = {{$itemData.DbName}}.NewStore(path, name, bucketList, indexList, readOnly)
     {{else}}
-        err = errors.New("no database store found!")
+    } else if name == {{$itemData.DbDisplayName}} {
+        Store, err = {{$itemData.DbName}}.NewStore(path, name, bucketList, indexList, readOnly)
     {{end}}
-
+    {{- end -}}
+    }
+    {{else}}
+    err = errors.New("no database store found!")
+    {{end}}
 	return err
 }
