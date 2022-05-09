@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/uretgec/mydb-server/mystorage/services"
 	"github.com/uretgec/mydb-server/mystorage/loggers"
+	"github.com/uretgec/mydb-server/mystorage/services"
 
 	"github.com/tidwall/redcon"
 )
@@ -142,7 +142,7 @@ func handlerList(conn redcon.Conn, cmd redcon.Command) {
 		conn.WriteError(fmt.Sprintf("Get command error: %s", err.Error()))
 		return
 	}
-	//loggers.Sugar.With("result", result).Info("list")
+
 	if result == nil {
 		conn.WriteAny([]string{})
 		return
@@ -169,7 +169,7 @@ func handlerPrevList(conn redcon.Conn, cmd redcon.Command) {
 		conn.WriteError(fmt.Sprintf("Get command error: %s", err.Error()))
 		return
 	}
-	//loggers.Sugar.With("result", result).Info("prevlist")
+
 	if result == nil {
 		conn.WriteAny([]string{})
 		return

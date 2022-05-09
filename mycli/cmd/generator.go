@@ -12,6 +12,7 @@ import (
 
 type DbList []struct {
 	DbStore
+	ServiceName string `json:"service-name"`
 }
 
 type DbStore struct {
@@ -70,7 +71,13 @@ var generatorCmd = &cobra.Command{
 				generateTemplate2File(tmplFiles, "store.go.tmpl", fmt.Sprintf("../%s/store/%s/", serviceName, dbStore.DbName), "store.go", dbStore)
 
 				// Collect DbStore data
-				dbList = append(dbList, struct{ DbStore }{*dbStore})
+				dbList = append(dbList, struct {
+					DbStore
+					ServiceName string "json:\"service-name\""
+				}{
+					DbStore:     *dbStore,
+					ServiceName: serviceName,
+				})
 			}
 
 			// Generate: storage file ///////

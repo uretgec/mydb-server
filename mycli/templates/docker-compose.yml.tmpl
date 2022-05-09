@@ -3,9 +3,9 @@ version: '3.8'
 services:
 {{range $itemKey, $itemData := .}}
   {{$itemData.ContainerName}}:
-    image: {{$itemData.ContainerName}}:{{$itemData.DbName}}
+    image: {{.ServiceName}}:{{$itemData.DbName}}
     build:
-      context: ./mystorage
+      context: ./{{.ServiceName}}
       args:
         ENV_FILE: .{{$itemData.DbName}}.env
     container_name: {{$itemData.ContainerName}}

@@ -1,7 +1,7 @@
 service-name: mystorage
 databases:
   - devstore
-  - mystore
+  - mydbstore
 
 devstore:
   sync-interval: 10
@@ -20,16 +20,16 @@ devstore:
     - "urls"
     - "items"
 
-mystore:
+mydbstore:
   sync-interval: 10
   redis-addr: localhost
   redis-port: 6380
   db-storage: sniper # boltdb|sniper
-  db-name: mystore
-  db-display-name: MyStore
-  db-path: ../data/db/mystore/
+  db-name: mydbstore
+  db-display-name: MyDbStore
+  db-path: ../data/db/mydbstore/
   db-read-only: false
-  container-name: mystorage
+  container-name: mydbstorage
   bucket-list:
     - "urls"
     - "items"
