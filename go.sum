@@ -214,6 +214,8 @@ github.com/uretgec/mydb v0.0.0-20220508200441-396d015061c1 h1:7Lzv8/PI/+hHvAXu/I
 github.com/uretgec/mydb v0.0.0-20220508200441-396d015061c1/go.mod h1:iT4PDVBu8YuAr2vc7RMzymoAra/wfaJScg0J3GgSwtc=
 github.com/uretgec/mydb v0.0.0-20220528211040-c1436837741c h1:vrhRMHbAJ3xptIVXexFagR9Z8rAiLj3Fw5zD6Jsi7sk=
 github.com/uretgec/mydb v0.0.0-20220528211040-c1436837741c/go.mod h1:iT4PDVBu8YuAr2vc7RMzymoAra/wfaJScg0J3GgSwtc=
+github.com/uretgec/mydb v1.1.0 h1:ltC0Ceer+ZJKsC8xv3lw/vX9Sft4UOS2z9rMGxrjLJU=
+github.com/uretgec/mydb v1.1.0/go.mod h1:CSpKRg6hDzHDcfiBbndqwFEmOPHy1BqVuwjH+d8j8hI=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=

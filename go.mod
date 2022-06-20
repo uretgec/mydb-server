@@ -7,7 +7,7 @@ require (
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.12.0
 	github.com/tidwall/redcon v1.4.5
-	github.com/uretgec/mydb v0.0.0-20220528211040-c1436837741c
+	github.com/uretgec/mydb v1.1.0
 	go.uber.org/zap v1.21.0
 )
 
